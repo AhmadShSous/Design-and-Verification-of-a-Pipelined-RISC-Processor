@@ -48,3 +48,43 @@ The processor was first implemented as a **single-cycle datapath** to verify cor
 |          |         |        | CLL          |
 
 ### Instruction Format (32-bit)
+Opcode[31:26] | Rd[25:22] | Rs[21:18] | Rt[17:14] | Imm[13:0]
+
+
+- Immediate field is:
+  - **Sign-extended** for arithmetic, memory, and control instructions  
+  - **Zero-extended** for logical instructions  
+- Branch and jump immediates are PC-relative  
+
+---
+
+##  Pipeline Hazard Handling
+
+### Data Hazards
+- Forwarding from **EX/MEM** and **MEM/WB** pipeline stages  
+- Load-use hazard detection with pipeline stalling  
+
+### Control Hazards
+- Branch decision handled early in the Decode stage  
+- Pipeline flushing using kill signals  
+- One-cycle branch penalty  
+
+### Structural Hazards
+- Avoided using separate instruction and data memories  
+
+### Exception Handling
+- Detection of invalid **LDW/SDW** instructions (odd register index)  
+- Faulty instructions are safely flushed without affecting program flow  
+
+---
+
+##  Testing and Verification
+- Functional verification performed using **Verilog testbenches**
+- Multiple assembly test programs executed successfully
+- Verification covers:
+  - Arithmetic and logical operations
+  - Memory access (LW, SW, LDW, SDW)
+  - Control flow (branches, jumps, calls)
+- Simulation waveforms and register dumps confirm correct pipeline behavior
+
+---
