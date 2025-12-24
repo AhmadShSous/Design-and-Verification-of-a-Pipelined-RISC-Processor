@@ -1,33 +1,50 @@
-# Design-and-Verification-of-a-Pipelined-RISC-Processor
-# Pipelined RISC Processor Implementation
+# Design and Verification of a Pipelined RISC Processor
 
-![Processor Architecture Diagram](https://via.placeholder.com/800x400?text=Pipelined+RISC+Processor+Architecture)
+A complete implementation of a **32-bit 5-stage pipelined RISC processor** written in **Verilog HDL**, developed as part of the **ENCS4370 – Computer Architecture** course at **Birzeit University**.
 
-This repository contains a complete implementation of a 5-stage pipelined RISC processor in Verilog, developed for the ENCS4370 Computer Architecture course at Birzeit University. The processor features a custom 32-bit RISC ISA with support for arithmetic, logical, memory, and control flow instructions.
+---
 
-## Key Features
+##  Project Overview
+This project presents the design, implementation, and verification of a custom RISC processor following classic RISC principles:
+- Fixed 32-bit instruction format
+- Load/store architecture
+- Separate instruction and data memories
+- Fully pipelined execution
 
-- **5-Stage Pipeline Architecture**:
-  - Instruction Fetch (IF)
-  - Instruction Decode (ID)
-  - Execution (EX)
-  - Memory Access (MEM)
-  - Write Back (WB)
-  
-- **Advanced Hazard Handling**:
-  - Data forwarding for RAW hazards
-  - Pipeline stalling for load-use hazards
-  - Branch prediction with 1-cycle penalty
-  - Exception handling for invalid operations
+The processor was first implemented as a **single-cycle datapath** to verify correctness, then extended into a **5-stage pipelined architecture** with full hazard handling and exception support.
 
-- **Comprehensive Instruction Support**:
-  | Arithmetic | Logical | Memory | Control Flow |
-  |------------|---------|--------|--------------|
-  | ADD        | OR      | LW     | BZ           |
-  | SUB        | ORI     | SW     | BGZ          |
-  | ADDI       |         | LDW    | BLZ          |
-  |            |         | SDW    | JR           |
-  |            |         |        | J            |
-  |            |         |        | CALL         |
+---
 
-## Repository Structure
+##  Processor Architecture
+
+### Pipeline Stages
+1. **Instruction Fetch (IF)**  
+2. **Instruction Decode (ID)**  
+3. **Execution (EX)**  
+4. **Memory Access (MEM)**  
+5. **Write Back (WB)**  
+
+### Architectural Features
+- 32-bit fixed-length instructions  
+- 16 general-purpose registers (R0–R15)  
+- R15 used as Program Counter (PC)  
+- R14 used as Return Address register (CALL)  
+- Separate instruction and data memory  
+- Word-aligned memory access  
+
+---
+
+##  Instruction Set Architecture (ISA)
+
+### Supported Instructions
+
+| Arithmetic | Logical | Memory | Control Flow |
+|----------|---------|--------|--------------|
+| ADD      | OR      | LW     | BZ           |
+| SUB      | ORI     | SW     | BGZ          |
+| ADDI     |         | LDW    | BLZ          |
+| CMP      |         | SDW    | JR           |
+|          |         |        | J            |
+|          |         |        | CLL          |
+
+### Instruction Format (32-bit)
